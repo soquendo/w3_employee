@@ -179,8 +179,14 @@ footer {
     width: 170px;
 }
 
+.confirm-delete-btn:hover {
+    background-color: green;
+    color: white;
+    transform: scale(1.05);
+}
+
 .cancel-btn:hover {
-    background-color: orange;
+    background-color: red;
     color: white;
     transform: scale(1.05);
 }
@@ -203,4 +209,24 @@ form button[type="submit"]:hover {
 
 h1 {
     text-align: center;
+}
+
+.confirm-delete-btn, .cancel-btn {
+    background-color: white;
+    color: #302D69;
+    font-weight: 600;
+    padding: 12px 20px;
+    border-radius: 5px;
+    border: 2px solid #302D69;
+    cursor: pointer;
+    font-size: 16px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease, transform 0.2s;
+    text-decoration: none;
+    width: 170px; /* Ensures both buttons are the same size */
 }

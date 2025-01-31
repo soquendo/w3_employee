@@ -3,10 +3,8 @@
     <p>Are you sure you want to delete <strong>{{employee.firstName}} {{employee.lastName}}</strong>?</p>
     
     <div class="delete-actions">
-        <form action="/employees/{{employee._id}}?_method=DELETE" method="POST">
-            <button type="submit" class="delete-btn">Confirm Delete</button>
-        </form>
-        <a href="/employees" class="cancel-btn">Cancel</a>
+        <button type="submit" class="confirm-delete-btn">Confirm Delete</button>
+        <a href="/" class="cancel-btn">Cancel</a>
     </div>
 
 </div>
