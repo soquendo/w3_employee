@@ -1,0 +1,17 @@
+<h1>Edit Employee</h1>
+<form action="/employees/{{employee._id}}?_method=PUT" method="POST">
+    <input type="text" name="firstName" value="{{employee.firstName}}" required>
+    <input type="text" name="lastName" value="{{employee.lastName}}" required>
+
+    <select name="department" required>
+        <option value="HR" {{#if (eq employee.department "HR")}}selected{{/if}}>HR</option>
+        <option value="Engineering" {{#if (eq employee.department "Engineering")}}selected{{/if}}>Engineering</option>
+        <option value="Marketing" {{#if (eq employee.department "Marketing")}}selected{{/if}}>Marketing</option>
+    </select>
+
+    <input type="date" name="startDate" value="{{formatDate employee.startDate}}" required>
+    <input type="text" name="jobTitle" value="{{employee.jobTitle}}" required>
+    <input type="number" name="salary" value="{{employee.salary}}" required>
+    
+    <button type="submit">Update Employee</button>
+</form>
