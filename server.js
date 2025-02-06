@@ -12,7 +12,7 @@ require('./config/passport')(passport);
 const employeeRoutes = require('./routes/employeeRoutes');
 const authRoutes = require('./routes/auth');
 const Employee = require('./models/Employee');
-const flash = require('connect-flash');
+const flash = require('express-flash');
 const app = express();
 
 // session middleware - before passport
@@ -24,6 +24,9 @@ app.use(session({
 
 app.use(flash());
 app.use((req, res, next) => {
+    res.locals.user = req.user || null;
+    res.locals.success_msg = req.flash('success_msg');
+    res.locals.error_msg = req.flash('error_msg');
     res.locals.error = req.flash('error');
     next();
 });
@@ -58,7 +61,8 @@ app.use('/employees', employeeRoutes);
 // authentication middleware for protected routes
 function ensureAuthenticated(req, res, next) {
     if (req.isAuthenticated()) return next();
-    res.redirect('/login');
+    req.flash('error_msg', 'You must be logged in to access this page');
+    res.redirect('/auth/login');
 }
 
 // protected dashboard route

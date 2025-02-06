@@ -2,10 +2,10 @@
     <a href="/" class="nav-link">Home</a>
 
     {{#if user}}
-        <a href="/dashboard" class="nav-link">Dashboard</a>
-        <a href="/auth/logout" class="nav-link logout-btn">Logout</a>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/auth/logout">Logout</a>
     {{else}}
-        <a href="/auth/login" class="nav-link btn">Login</a>
-        <a href="/auth/register" class="nav-link btn">Register</a>
+        <a href="/auth/login">Login</a>
+        <a href="/auth/register">Register</a>
     {{/if}}
 </nav>
