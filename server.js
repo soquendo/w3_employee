@@ -6,14 +6,37 @@ const Handlebars = require('handlebars');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const employeeRoutes = require('./routes/employeeRoutes');
-const Employee = require('./models/Employee'); // model needed for homepage data
+const Employee = require('./models/Employee');
+const session = require('express-session');
+const passport = require('passport');
+require('./config/passport')(passport);
+const authRoutes = require('./routes/auth');
+
+
+app.use(session({
+    secret: 'secretkey',
+    resave: false,
+    saveUninitialized: false
+}));
 
 const app = express();
 
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use('/employees', employeeRoutes);
+app.use('/auth', authRoutes);
+
+function ensureAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) return next();
+    res.redirect('/login');
+}
+
+app.get('/dashboard', ensureAuthenticated, (req, res) => {
+    res.send(`Welcome, ${req.user.username}`);
+});
 
 // handlebars setup with helpers
 const hbs = exphbs.create({
