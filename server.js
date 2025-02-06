@@ -12,7 +12,7 @@ require('./config/passport')(passport);
 const employeeRoutes = require('./routes/employeeRoutes');
 const authRoutes = require('./routes/auth');
 const Employee = require('./models/Employee');
-
+const flash = require('connect-flash');
 const app = express();
 
 // session middleware - before passport
@@ -21,6 +21,12 @@ app.use(session({
     resave: false,
     saveUninitialized: false
 }));
+
+app.use(flash());
+app.use((req, res, next) => {
+    res.locals.error = req.flash('error');
+    next();
+});
 
 app.use(passport.initialize());
 app.use(passport.session());

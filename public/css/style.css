@@ -230,3 +230,36 @@ h1 {
     width: 170px;
     box-sizing: border-box;
 }
+
+.form-container {
+    width: 300px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #CBCAE8;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.form-container input {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #302D69;
+    border-radius: 5px;
+}
+
+.form-container button {
+    width: 100%;
+    padding: 10px;
+    background-color: #E9D08F;
+    color: black;
+    font-weight: 600;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.form-container button:hover {
+    background-color: green;
+    color: white;
+}
