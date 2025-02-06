@@ -5,40 +5,31 @@ const { allowInsecurePrototypeAccess } = require('@handlebars/allow-prototype-ac
 const Handlebars = require('handlebars');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
-const employeeRoutes = require('./routes/employeeRoutes');
-const Employee = require('./models/Employee');
 const session = require('express-session');
 const passport = require('passport');
 require('./config/passport')(passport);
+const employeeRoutes = require('./routes/employeeRoutes');
 const authRoutes = require('./routes/auth');
+const Employee = require('./models/Employee');
 
+const app = express();
 
+// session middleware - before passport
 app.use(session({
     secret: 'secretkey',
     resave: false,
     saveUninitialized: false
 }));
 
-const app = express();
-
 app.use(passport.initialize());
 app.use(passport.session());
+
+// middleware
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
-app.use('/employees', employeeRoutes);
-app.use('/auth', authRoutes);
 
-function ensureAuthenticated(req, res, next) {
-    if (req.isAuthenticated()) return next();
-    res.redirect('/login');
-}
-
-app.get('/dashboard', ensureAuthenticated, (req, res) => {
-    res.send(`Welcome, ${req.user.username}`);
-});
-
-// handlebars setup with helpers
+// handlebars setup
 const hbs = exphbs.create({
     extname: 'hbs',
     handlebars: allowInsecurePrototypeAccess(Handlebars),
@@ -51,6 +42,23 @@ const hbs = exphbs.create({
 app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
 
+// authentication routes
+app.use('/auth', authRoutes);
+
+// employee routes
+app.use('/employees', employeeRoutes);
+
+// authentication middleware for protected routes
+function ensureAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) return next();
+    res.redirect('/login');
+}
+
+// protected dashboard route
+app.get('/dashboard', ensureAuthenticated, (req, res) => {
+    res.send(`Welcome, ${req.user.username}`);
+});
+
 // fetch employees for homepage
 app.get('/', async (req, res) => {
     try {
@@ -62,14 +70,15 @@ app.get('/', async (req, res) => {
     }
 });
 
-// database connection
+// db connection - server start
 mongoose
-  .connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => console.log('MongoDB Connected'))
-  .catch(err => console.error(err));
-
-const PORT = process.env.PORT || 5050;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+    .connect(process.env.MONGO_URI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    })
+    .then(() => {
+        console.log('MongoDB Connected');
+        const PORT = process.env.PORT || 5050;
+        app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+    })
+    .catch(err => console.error(err));
