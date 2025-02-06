@@ -1,16 +1,8 @@
 <h1>Employee Management System</h1>
 
-<!-- authentication-based actions -->
-{{#if user}}
-    <a href="/dashboard"><button>Go to Dashboard</button></a>
-{{else}}
-    <a href="/auth/login"><button>Login</button></a>
-    <a href="/auth/register"><button>Register</button></a>
-{{/if}}
-
 <!-- employee Table -->
 {{#if employees.length}}
-    <div class="table-container">        
+    <div class="table-container">
         <table>
             <thead>
                 <tr>
@@ -29,7 +21,7 @@
                     <td>{{firstName}}</td>
                     <td>{{lastName}}</td>
                     <td>{{department}}</td>
-                    <td>{{startDate}}</td>
+                    <td>{{formatDate startDate}}</td>
                     <td>{{jobTitle}}</td>
                     <td>{{salary}}</td>
                     <td>

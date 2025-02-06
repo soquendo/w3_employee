@@ -1,16 +1,27 @@
-<form action="/employees/{{employee._id}}?_method=PUT" method="POST">
-    <input type="text" name="firstName" value="{{employee.firstName}}" required>
-    <input type="text" name="lastName" value="{{employee.lastName}}" required>
+<h1>Edit Employee</h1>
 
-    <select name="department" required>
+<form action="/employees/{{employee._id}}?_method=PUT" method="POST">
+    <label for="firstName">First Name:</label>
+    <input type="text" id="firstName" name="firstName" value="{{employee.firstName}}" required>
+
+    <label for="lastName">Last Name:</label>
+    <input type="text" id="lastName" name="lastName" value="{{employee.lastName}}" required>
+
+    <label for="department">Department:</label>
+    <select id="department" name="department" required>
         <option value="HR" {{#if (eq employee.department "HR")}}selected{{/if}}>HR</option>
         <option value="Engineering" {{#if (eq employee.department "Engineering")}}selected{{/if}}>Engineering</option>
         <option value="Marketing" {{#if (eq employee.department "Marketing")}}selected{{/if}}>Marketing</option>
     </select>
 
-    <input type="date" name="startDate" value="{{formatDate employee.startDate}}" required>
-    <input type="text" name="jobTitle" value="{{employee.jobTitle}}" required>
-    <input type="number" name="salary" value="{{employee.salary}}" required>
+    <label for="startDate">Start Date:</label>
+    <input type="date" id="startDate" name="startDate" value="{{formatDate employee.startDate}}" required>
+
+    <label for="jobTitle">Job Title:</label>
+    <input type="text" id="jobTitle" name="jobTitle" value="{{employee.jobTitle}}" required>
+
+    <label for="salary">Salary:</label>
+    <input type="number" id="salary" name="salary" value="{{employee.salary}}" required>
     
     <button type="submit">Update Employee</button>
 </form>
