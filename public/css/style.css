@@ -9,17 +9,40 @@ body {
 }
 
 nav {
-    background-color: #302D69;
-    padding: 10px;
-    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #312c72;
+    padding: 20px;
 }
 
-nav a {
+nav .logo a {
     color: white;
+    font-size: 22px;
+    font-weight: 700;
     text-decoration: none;
-    margin: 15px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    margin-left: 30px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
     font-size: 18px;
-    font-weight: 600;
+}
+
+nav ul li a:hover {
+    color: #ffd166;
 }
 
 button {
@@ -211,7 +234,6 @@ h1 {
     text-align: center;
 }
 
-
 .confirm-delete-btn, .cancel-btn {
     background-color: white;
     color: #302D69;
@@ -261,5 +283,58 @@ h1 {
 
 .form-container button:hover {
     background-color: green;
+    color: white;
+}
+
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 80px);
+    padding: 20px;
+}
+
+.welcome-card {
+    background-color: #CBCAE8;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 50%;
+    max-width: 600px;
+    min-width: 300px;
+    transition: transform 0.3s ease;
+}
+
+.welcome-card:hover {
+    transform: scale(1.02);
+}
+
+.welcome-card h1 {
+    color: #312c72;
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.welcome-card p {
+    font-size: 18px;
+    color: #302D69;
+    margin-bottom: 25px;
+}
+
+.logout-btn {
+    background-color: #E9D08F;
+    padding: 12px 25px;
+    font-size: 18px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.logout-btn:hover {
+    background-color: #FFA500;
     color: white;
 }

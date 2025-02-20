@@ -1,11 +1,15 @@
 <nav>
-    <a href="/" class="nav-link">Home</a>
-
+  <div class="logo">
+    <a href="/">Employee Management System</a>
+  </div>
+  <ul>
+    <li><a href="/">Home</a></li>
     {{#if user}}
-        <a href="/dashboard">Dashboard</a>
-        <a href="/auth/logout">Logout</a>
+      <li><a href="/dashboard">Dashboard</a></li>
+      <li><a href="/auth/logout">Logout</a></li>
     {{else}}
-        <a href="/auth/login">Login</a>
-        <a href="/auth/register">Register</a>
+      <li><a href="/auth/login">Login</a></li>
+      <li><a href="/auth/register">Register</a></li>
     {{/if}}
+  </ul>
 </nav>

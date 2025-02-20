@@ -15,14 +15,19 @@ const Employee = require('./models/Employee');
 const flash = require('express-flash');
 const app = express();
 
-// session middleware - before passport
+// session middleware
 app.use(session({
     secret: 'secretkey',
     resave: false,
     saveUninitialized: false
 }));
 
+// passport and flash middleware
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(flash());
+
+// set user globally for all views
 app.use((req, res, next) => {
     res.locals.user = req.user || null;
     res.locals.success_msg = req.flash('success_msg');
@@ -31,10 +36,7 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use(passport.initialize());
-app.use(passport.session());
-
-// middleware
+// static files and middleware
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
@@ -48,29 +50,25 @@ const hbs = exphbs.create({
         formatDate: (date) => new Date(date).toISOString().split('T')[0]
     }
 });
-
 app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
 
-// authentication routes
+// routes
 app.use('/auth', authRoutes);
-
-// employee routes
 app.use('/employees', employeeRoutes);
 
 // authentication middleware for protected routes
 function ensureAuthenticated(req, res, next) {
     if (req.isAuthenticated()) return next();
-    req.flash('error_msg', 'You must be logged in to access this page');
     res.redirect('/auth/login');
 }
 
-// protected dashboard route
+// dashboard route (protected)
 app.get('/dashboard', ensureAuthenticated, (req, res) => {
-    res.send(`Welcome, ${req.user.username}`);
+    res.render('dashboard', { user: req.user });
 });
 
-// fetch employees for homepage
+// homepage with employees
 app.get('/', async (req, res) => {
     try {
         const employees = await Employee.find();
@@ -81,7 +79,7 @@ app.get('/', async (req, res) => {
     }
 });
 
-// db connection - server start
+// db connection
 mongoose
     .connect(process.env.MONGO_URI, {
         useNewUrlParser: true,
@@ -89,12 +87,10 @@ mongoose
     })
     .then(() => {
         console.log('MongoDB Connected ✅');
-
-        // server starts only after successful db connection
         const PORT = process.env.PORT || 5050;
         app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
     })
     .catch(err => {
         console.error('MongoDB Connection Error ❌:', err);
-        process.exit(1); // exit process if db connection fails
+        process.exit(1);
     });
