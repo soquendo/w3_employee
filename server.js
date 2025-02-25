@@ -41,13 +41,19 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 
-// handlebars setup
+// handlebars setup with corrected formatDate helper
 const hbs = exphbs.create({
     extname: 'hbs',
     handlebars: allowInsecurePrototypeAccess(Handlebars),
     helpers: {
         eq: (a, b) => a === b,
-        formatDate: (date) => new Date(date).toISOString().split('T')[0]
+        formatDate: (date) => {
+            const d = new Date(date);
+            const month = (`0${d.getMonth() + 1}`).slice(-2);
+            const day = (`0${d.getDate()}`).slice(-2);
+            const year = d.getFullYear();
+            return `${month}/${day}/${year}`;
+        }
     }
 });
 app.engine('hbs', hbs.engine);
@@ -63,7 +69,7 @@ function ensureAuthenticated(req, res, next) {
     res.redirect('/auth/login');
 }
 
-// dashboard route (protected)
+// dashboard route
 app.get('/dashboard', ensureAuthenticated, (req, res) => {
     res.render('dashboard', { user: req.user });
 });

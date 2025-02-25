@@ -1,8 +1,13 @@
-<h1>Employee Management System</h1>
+{{#if user}}
+<div style="text-align: center; margin-bottom: 20px;">
+    <a href="/employees/new">
+        <button class="add-employee-btn">Add Employee</button>
+    </a>
+</div>
+{{/if}}
 
-<!-- employee Table -->
 {{#if employees.length}}
-    <div class="table-container">
+    <div class="table-container">        
         <table>
             <thead>
                 <tr>
@@ -12,7 +17,9 @@
                     <th>Start Date</th>
                     <th>Job Title</th>
                     <th>Salary</th>
+                    {{#if user}}
                     <th>Actions</th>
+                    {{/if}}
                 </tr>
             </thead>
             <tbody>
@@ -24,17 +31,19 @@
                     <td>{{formatDate startDate}}</td>
                     <td>{{jobTitle}}</td>
                     <td>{{salary}}</td>
+                    {{#if ../user}}
                     <td>
                         <div class="action-buttons">
                             <a href="/employees/edit/{{_id}}" class="edit-btn">Edit</a>
                             <a href="/employees/delete/{{_id}}" class="delete-btn">Delete</a>
                         </div>
                     </td>
+                    {{/if}}
                 </tr>
                 {{/each}}
             </tbody>
         </table>
     </div>    
 {{else}}
-    <p>No employees found.</p>
+    <p style="text-align: center; font-weight: bold;">No employees found.</p>
 {{/if}}

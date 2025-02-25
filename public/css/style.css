@@ -56,7 +56,7 @@ button {
 }
 
 button:hover {
-    background-color: #CBCAE8;
+    background-color: #E9D08F;
 }
 
 .table-container {
@@ -115,25 +115,31 @@ footer {
     gap: 10px;
 }
 
-.edit-btn, .delete-btn {
-    background-color: #E9D08F;
+.edit-btn {
+    background-color: #eeba34; 
     color: black;
     border: none;
     padding: 10px 15px;
     cursor: pointer;
     font-weight: 600;
     border-radius: 5px;
-    font-size: 14px;
+    font-size: 16px;
 }
 
-.edit-btn {
-    background-color: #E9D08F;
-    color: black;
-}
-
-.edit-btn:hover {
-    background-color: #FFA500;
+.delete-btn {
+    background-color: red;
     color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-weight: 600;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.edit-btn:hover,
+.delete-btn:hover {
+    background-color: inherit;
 }
 
 .delete-container {
@@ -165,46 +171,21 @@ footer {
     margin-top: 20px;
 }
 
-.delete-btn {
-    background-color: #E9D08F;
-    color: black;
-    border: none;
-    padding: 12px 20px;
-    cursor: pointer;
-    font-weight: 600;
-    border-radius: 5px;
-    transition: background 0.3s ease, transform 0.2s;
-}
-
-.delete-btn:hover {
-    background-color: red;
-    color: white;
-    transform: scale(1.05);
-}
-
-.cancel-btn {
+.confirm-delete-btn, .cancel-btn {
     background-color: white;
     color: #302D69;
-    font-weight: 600;
-    padding: 12px 20px;
-    border-radius: 5px;
     border: 2px solid #302D69;
-    cursor: pointer;
+    font-weight: 600;
+    padding: 12px 25px;
     font-size: 16px;
-    height: 44px;
-    line-height: 44px;
-    text-align: center;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.3s ease, transform 0.2s;
-    text-decoration: none;
-    width: 170px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s;
 }
 
 .confirm-delete-btn:hover {
-    background-color: green;
-    color: white;
+    background-color: white;
+    color: black;
     transform: scale(1.05);
 }
 
@@ -212,129 +193,4 @@ footer {
     background-color: red;
     color: white;
     transform: scale(1.05);
-}
-
-form button[type="submit"] {
-    background-color: #E9D08F;
-    color: black;
-    border: none;
-    padding: 10px 15px;
-    cursor: pointer;
-    font-weight: 600;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
-
-form button[type="submit"]:hover {
-    background-color: green;
-    color: white;
-}
-
-h1 {
-    text-align: center;
-}
-
-.confirm-delete-btn, .cancel-btn {
-    background-color: white;
-    color: #302D69;
-    font-weight: 600;
-    padding: 12px 20px;
-    border-radius: 5px;
-    border: 2px solid #302D69;
-    cursor: pointer;
-    font-size: 16px;
-    height: 50px;
-    line-height: 50px;
-    text-align: center;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 170px;
-    box-sizing: border-box;
-}
-
-.form-container {
-    width: 300px;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: #CBCAE8;
-    border-radius: 5px;
-    text-align: center;
-}
-
-.form-container input {
-    width: 90%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #302D69;
-    border-radius: 5px;
-}
-
-.form-container button {
-    width: 100%;
-    padding: 10px;
-    background-color: #E9D08F;
-    color: black;
-    font-weight: 600;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.form-container button:hover {
-    background-color: green;
-    color: white;
-}
-
-.dashboard-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: calc(100vh - 80px);
-    padding: 20px;
-}
-
-.welcome-card {
-    background-color: #CBCAE8;
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    width: 50%;
-    max-width: 600px;
-    min-width: 300px;
-    transition: transform 0.3s ease;
-}
-
-.welcome-card:hover {
-    transform: scale(1.02);
-}
-
-.welcome-card h1 {
-    color: #312c72;
-    font-size: 36px;
-    margin-bottom: 10px;
-}
-
-.welcome-card p {
-    font-size: 18px;
-    color: #302D69;
-    margin-bottom: 25px;
-}
-
-.logout-btn {
-    background-color: #E9D08F;
-    padding: 12px 25px;
-    font-size: 18px;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-    font-weight: 600;
-    transition: background-color 0.3s ease;
-}
-
-.logout-btn:hover {
-    background-color: #FFA500;
-    color: white;
 }

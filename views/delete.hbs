@@ -1,10 +1,10 @@
 <div class="delete-container">
     <h1>Delete Employee</h1>
     <p>Are you sure you want to delete <strong>{{employee.firstName}} {{employee.lastName}}</strong>?</p>
-    
     <div class="delete-actions">
-        <button type="submit" class="confirm-delete-btn">Confirm Delete</button>
-        <a href="/" class="cancel-btn">Cancel</a>
-    </div>
-
+        <form action="/employees/{{employee._id}}?_method=DELETE" method="POST">
+            <button type="submit" class="delete-btn">Confirm Delete</button>
+        </form>
+        <a href="/employees" class="cancel-btn">Cancel</a>
+</div>
 </div>

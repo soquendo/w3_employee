@@ -1,13 +1,16 @@
-<form action="/employees" method="POST">
-    <input type="text" name="firstName" placeholder="First Name" required>
-    <input type="text" name="lastName" placeholder="Last Name" required>
-    <select name="department" required>
-        <option value="HR">HR</option>
-        <option value="Engineering">Engineering</option>
-        <option value="Marketing">Marketing</option>
-    </select>
-    <input type="date" name="startDate" required>
-    <input type="text" name="jobTitle" placeholder="Job Title" required>
-    <input type="number" name="salary" placeholder="Salary" required>
-    <button type="submit">Add Employee</button>
-</form>
+<div class="form-container">
+    <h2>Add New Employee</h2>
+    <form action="/employees" method="POST">
+        <input type="text" name="firstName" placeholder="First Name" required>
+        <input type="text" name="lastName" placeholder="Last Name" required>
+        <select name="department" required>
+            <option value="HR">HR</option>
+            <option value="Engineering">Engineering</option>
+            <option value="Marketing">Marketing</option>
+        </select>
+        <input type="date" name="startDate" required>
+        <input type="text" name="jobTitle" placeholder="Job Title" required>
+        <input type="number" name="salary" placeholder="Salary" required>
+        <button type="submit" class="submit-btn">Add Employee</button>
+    </form>
+</div>
